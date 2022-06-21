@@ -1,8 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const sauceRoutes = require('./routes/sauces');
+const saucesRoutes = require('./routes/sauces');
 const userRoutes = require("./routes/user");
+const bodyParser = require('body-parser');
 const path = require('path');
+const cors = require('cors')
 
 const app = express();
 
@@ -21,8 +23,10 @@ const app = express();
     next();
   });
   
-  
-app.use('/api/stuff', sauceRoutes);
+
+app.use(cors())
+app.use(bodyParser.json())
+app.use('/api/sauces', saucesRoutes);
 app.use('/api/auth', userRoutes);
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
