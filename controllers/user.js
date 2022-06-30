@@ -48,17 +48,17 @@ exports.signup = (req, res, next) => {
             .catch((error) => res.status(500).json({ error }));
     } else {
         res.status(401).json({
-            message: "OUPS ! Votre mot de passe et/ou email est erroné ",
+            message: "Votre mot de passe et/ou email est erroné ",
         });
     }
 };
-// Connexion
+// Connexion avec une adresse mail et mot de passe valide
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
             if (!user) {
                 return res.status(401).json({
-                    error: "OUPS ! Mauvais identifiants de connexion, Veuillez Réessayer",
+                    error: "Utilisateur non trouvé ! ",
                 });
             }
             bcrypt
@@ -66,7 +66,7 @@ exports.login = (req, res, next) => {
                 .then((valid) => {
                     if (!valid) {
                         return res.status(401).json({
-                            error: "OUPS ! Mauvais identifiants de connexion, Veuillez Réessayer",
+                            error: "Mot de passe incorrect ! ",
                         });
                     }
                     res.status(200).json({
