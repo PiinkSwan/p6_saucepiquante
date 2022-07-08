@@ -1,6 +1,7 @@
+
 const express = require('express');
 
-//Mongoose est un package qui facilite les interactions avec notre base de donn&es
+//Mongoose est un package qui facilite les interactions avec notre base de données
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
@@ -35,10 +36,10 @@ const app = express();
 app.use(mongoSanitize());
 
 app.use(cors())
-//TRansofme le corps de la requête en JSON pour toutes les  routes
+//TRansofme le corps de la requête en JSON pour toutes les routes
 app.use(bodyParser.json())
 
-//Envoi des log dans le terminal prise en compte de POSTMAN
+//Envoi des log dans le terminal, prise en compte de POSTMAN
 app.use(morgan())
 
 app.use('/api/sauces', saucesRoutes);

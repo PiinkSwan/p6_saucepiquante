@@ -8,7 +8,6 @@ const apiLimiter = rateLimit ({//Limite la demande de connexion pour éviter le 
     maxi : 0,
 });
 
-
 router.post('/signup', userCtrl.signup);
 router.post('/login', apiLimiter, userCtrl.login);
 
