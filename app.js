@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const mongoSanitize = require('express-mongo-sanitize');
 const morgan = require('morgan');
 
-require('dotenv').config();
 const path = require('path');
 const cors = require('cors')
 
@@ -17,8 +16,13 @@ const userRoutes = require("./routes/user");
 //Lancement du framework Express
 const app = express();
 
+const dotenv = require('dotenv')
+const result = dotenv.config();
+if(result.error){
+  throw result.error
+}
 //Connexion à la base de donnés MongoDB
- mongoose.connect('mongodb+srv://WhitneyM:KQ44Lwbylw073EuH@cluster0.xl8le.mongodb.net/?retryWrites=true&w=majority',
+ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.xl8le.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
 { useNewUrlParser: true,
   useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
